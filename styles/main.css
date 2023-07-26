@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Libre+Baskerville:wght@700&display=swap');
+
+
+/* Terms */
+/* vh = Percentage VERTICAL HEIGHT of the screen */
+
+
+/* -------------------------------------------------- */
+/* Global Styles */
+
+/* Fonts */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Libre Baskerville', serif;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+
+/* Spacing */
+.full-height {
+    height: 100vh;
+}
+
+/* -------------------------------------------------- */
+/* Components */
+
+button {
+    border: none;
+    padding: 16px 24px;
+    border-radius: 5px;
+    background: #183828;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    color: white;
+}
+
+
+/* -------------------------------------------------- */
+/* Bootstrap Component Overrides */
+
+.carousel-item {
+    background-color: lightgray;
+}
+
+.carousel-control-next, .carousel-control-prev {
+    top: auto;
+    right: auto;
+    left: 24px;
+    bottom: 24px;
+    width: auto;
+    background-color: white;
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.carousel-control-next {
+    left: 84px;
+}
+
+
+.accordion {
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+
+/* -------------------------------------------------- */
+/* Home Page */
+
+.hero-image {
+    height: 90vh;
+    position: relative;
+    bottom: -100px;
+}
