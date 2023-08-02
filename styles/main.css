@@ -1,8 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Libre+Baskerville:wght@700&display=swap');
 
 
+
+
+
 /* Terms */
 /* vh = Percentage VERTICAL HEIGHT of the screen */
+
+
+
 
 
 /* -------------------------------------------------- */
@@ -18,10 +24,16 @@ p {
     font-size: 16px;
 }
 
+
+
 /* Spacing */
 .full-height {
     height: 100vh;
 }
+
+
+
+
 
 /* -------------------------------------------------- */
 /* Components */
@@ -35,6 +47,9 @@ button {
     font-size: 16px;
     color: white;
 }
+
+
+
 
 
 /* -------------------------------------------------- */
@@ -56,10 +71,11 @@ button {
 }
 
 
+
 /* Carousel */
 
 .carousel-item {
-    background-color: lightgray;
+    background-color: #E6F2E9;
 }
 
 .carousel-control-next, .carousel-control-prev {
@@ -78,38 +94,44 @@ button {
 }
 
 
+
+/* Accordion */
+
 .accordion {
-    width: 80%;
+    width: 70%;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
 
+
 /* Card */
 
 .card {
     border-radius: 150px 150px 12px 12px;
-    background: #f3f3f3;
+    background: #F3F3F3;
     text-align: center;
     height: 440px;
     border: none;
 }
 
 .card-img-top {
-    height: 320px;
+    width:auto;
+    height:320px;
     margin: auto;
-    width: auto;
-    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1); 
 }
 
 .card-img-top.small {
-    height: 200px;
+    height:200px;
 }
 
 .card-text {
     color: #18382B;
 }
+
+
 
 
 
@@ -120,4 +142,26 @@ button {
     height: 90vh;
     position: relative;
     bottom: -100px;
+}
+
+
+
+
+
+/* -------------------------------------------------- */
+/* Wishlist Page */
+
+/* Table */
+
+.table {
+    width: 70%;
+    margin: auto;
+}
+
+.table-img {
+    width:auto;
+    height:100px;
+}
+.remove-btn {
+    margin-top: 20px;
 }
