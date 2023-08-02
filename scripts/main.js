@@ -38,8 +38,8 @@ const plants = [
 
 
 
-// -----------------------------------------
 // When the document loads
+// -----------------------------------------
 
 $(document).ready(function(){
 
@@ -73,19 +73,19 @@ function loadPlants() {
         
         console.log(plant);
 
-        // 1: Select plants container and add the current array plant to it
+        // 1: Select the plants container and add the plant card to it (current array plant)
         $("#plantsContainer").append($("#plantCardTemplate").html());
 
-        // 2: Create a varible that contains the most recently added plant card
+        // 2: Create a variable that contains the most recently added plant card
         let currentChild = $("#plantsContainer").children().eq(i+1);
 
-        // 3: Set the content for the plant card from the plants list
+        // 3: Set the content for the current plant card from the plant array
         $(currentChild).find(".card-img-top").attr('src','assets/' + plant.image);
         $(currentChild).find("#nameText").text(plant.name);
         $(currentChild).find("#priceText").text('R' + plant.price);
         $(currentChild).find("#descriptionText").text(plant.description);
 
-        // 4: Hide the description text from the plant card
+        // 4: Hide the description text from the current plant card
         $(currentChild).find("#descriptionText").hide();
 
     }
@@ -95,8 +95,8 @@ function loadPlants() {
 
 
 
-// -----------------------------------------
 // When a plant card is clicked
+// -----------------------------------------
 
 $("#plantsContainer").on('click', '.card', function(){
 
@@ -113,45 +113,37 @@ $("#plantsContainer").on('click', '.card', function(){
 
 
 
+// Remove plant from wishlist (not the most efficient way to do it, but it's my attempt)
 // -----------------------------------------
-// Remove plant from wishlist
 
 $("#removeButton1").click(function(){
-
-    console.log("Clicked")
-
     $(".wishlistRow1").remove();
-
 });
+
 
 $("#removeButton2").click(function(){
-
-    console.log("Clicked")
-
     $(".wishlistRow2").remove();
-
 });
+
 
 $("#removeButton3").click(function(){
-
-    console.log("Clicked")
-
     $(".wishlistRow3").remove();
-
 });
+
 
 $("#removeButton4").click(function(){
-
-    console.log("Clicked")
-
     $(".wishlistRow4").remove();
-
 });
+
 
 $("#removeButton5").click(function(){
-
-    console.log("Clicked")
-
     $(".wishlistRow5").remove();
-
 });
+
+
+
+// Tried this but couldn't get it to work:
+
+// $("#removeButton").click(function(){
+// $(this).parent("#wishlistRow").remove(); 
+// });
