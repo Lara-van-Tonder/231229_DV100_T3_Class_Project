@@ -7,10 +7,10 @@ const arrPlants = [
     name: "Ficus Tree",
     price: 350,
     description: "Graceful and lush, this charming indoor plant boasts glossy, emerald-green leaves that effortlessly brighten any space.",
-    image: "plant1.png",
-    lightAmount: "low",
-    addedDate: "2023-03-25",
-    origin: "Texas"
+    image: "plant1.png", 
+    lightAmount: "low", // For FIlter and Sorting: 1. Add filter and sorting properties to objects after main properties are listed.
+    addedDate: "2023-03-25", // (For FIlter and Sorting) Date format: year-month-day 
+    origin: "Texas" // For API
   },
   {
     name: "White Sprite Succulent",
@@ -50,8 +50,11 @@ const arrPlants = [
   },
 ];
 
-let appliedFilter = "";
-let appliedSort = "date added";
+// For FIlter and Sorting:
+// 2. Create two new variables
+// Create outside of Array/Document Ready to make them global and easily accessible. This also means you can have a FILTER and SORT applied at the same time.
+let appliedFilter = ""; // "" Empty string because it's for ALL PLANTS
+let appliedSort = "date added"; // "" There is a value applied here because by DEFAULT we want it to sort the plants according to the date added.
 
 
 
@@ -73,7 +76,7 @@ $(document).ready(function(){
     // -----------------------------------------
     // Browse Page
 
-    filterSortPlants();
+    loadPlants(arrPlants);
 
 }); 
 
@@ -81,22 +84,30 @@ $(document).ready(function(){
 
 
 
+// For FIlter and Sorting:
+// 3. Update loadPlants() function
+
 // Load all plants
 // -----------------------------------------
 
-function loadPlants(plantsToShow) {
+function loadPlants(plantsToShow) { // For FIlter and Sorting: Needs to receive array that it's going to use
 
-  // Clear all elements inside the plants cards container
+  // For FIlter and Sorting:
+  // 4. Update loadPlants(plantsToShow) function. Can't be a fixed array (arrPlants) because the array is going to constantly be changing through adding or removing values).
 
-  $("#plantsContainer").empty();
+
+  $("#plantsContainer").empty(); // Clear all elements inside the plants cards container so that new filter and sort can be applied when clicked.
+
+
 
   // Loop though plants
 
-  for (let i = 0; i < plantsToShow.length; i++) {
-    const plant = plantsToShow[i];
+  for (let i = 0; i < plantsToShow.length; i++) { // Replace "arrPlants" with updated array "plantsToShow"
+    const plant = plantsToShow[i]; // Replace "arrPlants" with updated array "plantsToShow"
     
-    console.log(plant.name);
 
+
+    // For weather API
     $.ajax({
       type: "GET",
       url: "https://api.openweathermap.org/data/2.5/weather?q=" + plant.origin + "&appid=0c8a911e5c7f8e5a03991afe2075de21",
@@ -112,8 +123,11 @@ function loadPlants(plantsToShow) {
       
       $(currentChild).find("#originTemp").text("Origin Temp: " + Math.round(tempData.main.temp- 273) + "°C");
      
-    
     });
+
+
+
+
 
     // 1: Select the plants container add the plant card to it
     $("#plantsContainer").append($("#plantCardTemplate").html());
@@ -135,40 +149,82 @@ function loadPlants(plantsToShow) {
 
 };
 
+
+
+
+
 // ------------------------------------------------------------------------
 // When a filter or sort option is clicked
 // ------------------------------------------------------------------------
 
-$("input[name='filterRadio']").click(function(){
-  appliedFilter = $(this).attr('value');
 
-  filterSortPlants();
+// How to setup the filter and sort buttons
+// 1. $().click
+// 2. $("input[name='filterRadio']").click              -> Use input attribute called "name" given to button in HTML
+// 3. $("input[name='filterRadio']").click(function(){ })
+// 4. $("input[name='filterRadio']").click(function(){
+//      5. Add "value" in HTML to your sorting buttons. You decide what the value is called, no specific name needed, as long as you just know what it's value means.
+//      appliedFilter = $(this).attr('value')           -> (this) means select this current filter radio option that I clicked on. ".attr" is for selecting an attribute inside the button and we are selecting "value" that we assigned.
+//    })
+
+
+// For Filter buttons
+$("input[name='filterRadio']").click(function(){ 
+  appliedFilter = $(this).attr('value'); // Apply one of the two new variables that was created in "Step 2. Create two new variables" at the start
+
+  filterSortPlants(); // Need to add this here so that it actually does the filter and sorting that was setup. Here we do the on click event for the buttons to tell the page website what's going to happen.
 });
 
+// For Sort buttons
 $("input[name='sortRadio']").click(function(){
-  appliedSort = $(this).attr('value');
+  appliedSort = $(this).attr('value'); // Apply one of the two new variables that was created in "Step 2. Create two new variables" at the start
 
-  filterSortPlants();
+  filterSortPlants(); // Need to add this here so that it actually does the filter and sorting that was setup. Here we do the on click event for the buttons to tell the page website what's going to happen.
 });
+
+
+// For Filter and Sorting: 
+// 6. Create a new function
+
+// How to setup this function:
+//  1. function filterSortPlants() { 
+//    2. Create a new array and this array should contain whatever we filtered or sorted. 
+//    let filteredSortedArrPlants = [];              -> "let" to create a new variable. "[]" means that it's an empty array.
+//    3. Now we need to filter the plants
+//    4. if statement
+//  }
 
 function filterSortPlants() {
   
+
+
   let filteredSortedArrPlants = [];
 
   console.log(appliedFilter);
   console.log(appliedSort);
 
+
+
   // Filter Plants
 
-  if (appliedFilter) {
+  if (appliedFilter) { // Use the variable that was created for Filter during Step 2.
+    // Start with what this new array should contain. = arrPlants.filter() -> This means it's now going to loop through the list of plants.
+    // Content within brackets for arrPlants.filter():
+    // 1. "plant" -> Single plant it's currently looping through.
+    // 2. "=>" ->  Arrow function to replace all of the previous code you should have written for function.
+    // 3. "plant.lightAmount" -> This was added in during Step 1 for Filter and Sorting to arrPlants.
+    // 4. "==" -> If that is equal to
+    // 5. "appliedFilter" -> This contains "low" or "bright"
     filteredSortedArrPlants = arrPlants.filter(plant => plant.lightAmount == appliedFilter);
   } else {
-    filteredSortedArrPlants = arrPlants;
-  }
+    filteredSortedArrPlants = arrPlants; // Set to GLOBAL arrPlants. Don't change anything, just set it to the initial array we had at the top.
+  } // Had to wrap this in an "if" because of our outlier which is "All Plants" because it's "value" is set to empty "".
+
+
 
   // Sort Plants
 
-  if (appliedSort == "low to high") {
+  if (appliedSort == "low to high") { // "value" that was given in HTML
 
     // Sort plants from the lowest to highest price
     filteredSortedArrPlants = filteredSortedArrPlants.sort((a, b) => {
@@ -182,14 +238,30 @@ function filterSortPlants() {
       let da = new Date(a.addedDate);
       let db = new Date(b.addedDate);
     
-      return db - da;
+      return db - da; // Want the highest date first.
+    });
+
+
+    // Sort plants alphabetically
+  } else if (appliedSort == "alphabetically") {
+
+    filteredSortedArrPlants = filteredSortedArrPlants.sort((a, b) => {
+      return a.name - b.name;
     });
 
   }
 
+
+
+  // 
+  // 
+  // Need to add Alphabetic Sorting ***
+  // 
+  // 
+
   console.log(filteredSortedArrPlants)
 
-  loadPlants(filteredSortedArrPlants);
+  loadPlants(filteredSortedArrPlants); // Use function that was setup to load/display the plants on the website and include array that was created earlier. This will display the plants according to the filter or sort options.
 
 }
 
@@ -249,3 +321,23 @@ $("#removeButton5").click(function(){
 // $("#removeButton").click(function(){
 // $(this).parent("#wishlistRow").remove(); 
 // });
+
+
+
+
+$(document).ready(function(){
+
+  $.ajax({
+    type:"GET",
+    url:"https://api.openweathermap.org/data/2.5/weather?q=Pretoria&appid=0c8a911e5c7f8e5a03991afe2075de21",
+    success: function(data){
+
+      tempData = data
+
+      console.log(data);
+    }
+  }).done(function(){
+    $("#tempData").html(data.main.temp)
+  })
+
+})
